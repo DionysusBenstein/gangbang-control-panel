@@ -1,0 +1,58 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #e79e4f;
+    background: linear-gradient(107.54deg, #321F28 0%, rgba(115, 64, 70, 0.3) 99.99%, #734046 100%), #321F28;
+}
+
+.container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.wallets__header {
+    margin: 50px 0 28px 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+}
+
+.list-wallets {
+    list-style: none;
+}
+
+.list-wallets__header {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+}
+.list-wallets__item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    justify-items: center;
+    padding: 16px 20px;
+    transition: .1s ease-in-out;
+}
+
+.list-wallets__item:hover {
+    background: #734046;
+}
+
+.list-wallets__header:hover {
+    background: inherit;
+}
+
+.list-wallets__address {
+    justify-self: start;
+}
+
+.dasha {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0;
+}
