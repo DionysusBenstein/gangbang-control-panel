@@ -5,6 +5,7 @@
 }
 
 body {
+    min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     color: #e79e4f;
     background: linear-gradient(107.54deg, #321F28 0%, rgba(115, 64, 70, 0.3) 99.99%, #734046 100%), #321F28;
