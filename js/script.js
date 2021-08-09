@@ -2,18 +2,9 @@ const myModal = new HystModal({
     linkAttributeName: "data-hystmodal",
 });
 
-let fullPath = document.getElementById('wallet-file-picker').value;
-console.log(fullPath);
-
-if (fullPath) {
-    let startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-    let filename = fullPath.substring(startIndex);
-
-    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-        filename = filename.substring(1);
-    }
-
-    alert(filename);
+submitForms = function(){
+    document.getElementById("json-data").submit();
+    document.getElementById("file-data").submit();
 }
 
 fetch('https://gangbang-criapi.herokuapp.com/wallets')

@@ -19,6 +19,7 @@
         <span class="wallets__title title">Wallets</span>
         <a class="add-wallet-btn" href="#" data-hystmodal="#myModal">Add</a>
       </header>
+
       <ul class="wallets__list list-wallets">
         <li class="list-wallets__item list-wallets__header">
           <span class="list-wallets__address">Address</span>
@@ -32,6 +33,7 @@
           <span class="list-wallets__transactions">10</span>
           <span class="list-wallets__balance">0.00003501 BTC</span>
         </li> -->
+
         <!-- Modal -->
         <div class="hystmodal" id="myModal" aria-hidden="true">
           <div class="hystmodal__wrap">
@@ -41,19 +43,23 @@
                   <button data-hystclose class="hystmodal__close">Закрыть</button>
                 </header>
                 <div class="hystmodal__body">
-                  <label class="input-label">
-                    <div class="input-label__text">Address:</div>
-                    <input class="hystmodal__text-input" type="text">
-                  </label>
-                  <label class="input-label">
-                    <div class="input-label__text">Seed:</div>
-                    <textarea class="hystmodal__textarea textarea" rows="6"></textarea>
-                  </label>
+                  <form id="json-data" action="/">
+                    <label class="input-label">
+                      <div class="input-label__text">Address:</div>
+                      <input class="hystmodal__text-input" type="text">
+                    </label>
+                    <label class="input-label">
+                      <div class="input-label__text">Seed:</div>
+                      <textarea class="hystmodal__textarea textarea" rows="5"></textarea>
+                    </label>
+                  </form>
                 </div>
                 <div class="hystmodal__footer">
-                  <input id="wallet-file-picker" type="file">
-                  <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
-                  <button class="hystmodal__btn submit-btn" type="submit">OK</button>
+                  <form id="file-data" action="/">
+                    <input id="wallet-file-picker" type="file">
+                    <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
+                  </form>
+                  <button class="hystmodal__btn submit-btn" type="submit" onclick="submitForms()">OK</button>
                 </div>
               </div>
           </div>
@@ -65,6 +71,6 @@
     </div>
   </section>
   <script src="js/hystmodal.min.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
