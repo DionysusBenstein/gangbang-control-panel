@@ -7,6 +7,25 @@ submitForms = function(){
     document.getElementById("file-data").submit();
 }
 
+function showHideSeed() {
+    if (this.classList.contains('list-wallets__seed_active')) {
+        this.classList.remove('list-wallets__seed_active');
+    } else {
+        this.classList.add('list-wallets__seed_active');
+    }
+}
+
+function showHideCopyIcon() {
+    
+}
+
+listItems = document.querySelectorAll('.list-wallets__item')
+
+for (let i = 0; i < listItems.length; i++) {
+    listItems[i].addEventListener('click', showHideSeed, false);
+    listItems[i].addEventListener('mouseenter', showHideCopyIcon, false);
+}
+
 fetch('https://gangbang-criapi.herokuapp.com/wallets')
 .then(function(response) {
     return response.json();
@@ -48,7 +67,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             item.appendChild(transactions);
             item.appendChild(balance);
     
-            list.appendChild(item);
+            // list.appendChild(item);
         }
     });
 });

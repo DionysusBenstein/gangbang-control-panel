@@ -126,6 +126,7 @@ input[type="file"] {
     font-weight: 600;
     line-height: 22px;
 }
+
 .list-wallets__item {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -142,8 +143,46 @@ input[type="file"] {
     background: inherit;
 }
 
-.list-wallets__address {
+.list-wallets__text {
+    display: flex;
+    flex-direction: column;
     justify-self: start;
+}
+
+.list-wallets__address {
+    position: relative;
+    width: fit-content;
+    justify-self: start;
+}
+
+.list-wallets__item:first-child .list-wallets__address::after {
+    display: none;
+}
+
+.list-wallets__address::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -36px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("../img/icons/content_copy_black_24dp.svg") no-repeat center;
+    opacity: 0;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.list-wallets__seed {
+    display: none;
+    margin: 8px 0 0 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #d17c2e;
+}
+
+.list-wallets__seed_active .list-wallets__seed {
+    display: block;
 }
 
 .dasha {
