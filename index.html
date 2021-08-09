@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hystmodal.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +16,8 @@
   <section class="wallets">
     <div class="container">
       <header class="wallets__header">
-        Wallets
+        <span class="wallets__title title">Wallets</span>
+        <a class="add-wallet-btn" href="#" data-hystmodal="#myModal">Add</a>
       </header>
       <ul class="wallets__list list-wallets">
         <li class="list-wallets__item list-wallets__header">
@@ -30,12 +32,39 @@
           <span class="list-wallets__transactions">10</span>
           <span class="list-wallets__balance">0.00003501 BTC</span>
         </li> -->
+        <!-- Modal -->
+        <div class="hystmodal" id="myModal" aria-hidden="true">
+          <div class="hystmodal__wrap">
+              <div class="hystmodal__window" role="dialog" aria-modal="true">
+                <header class="hystmodal__header">
+                  <span class="hystmodal__title title">Add new wallet</span>
+                  <button data-hystclose class="hystmodal__close">Закрыть</button>
+                </header>
+                <div class="hystmodal__body">
+                  <label class="input-label">
+                    <div class="input-label__text">Address:</div>
+                    <input class="hystmodal__text-input" type="text">
+                  </label>
+                  <label class="input-label">
+                    <div class="input-label__text">Seed:</div>
+                    <textarea class="hystmodal__textarea textarea" rows="6"></textarea>
+                  </label>
+                </div>
+                <div class="hystmodal__footer">
+                  <input id="wallet-file-picker" type="file">
+                  <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
+                  <button class="hystmodal__btn submit-btn" type="submit">OK</button>
+                </div>
+              </div>
+          </div>
+      </div>
       </ul>
     </div>
     <div class="dasha">
       <img src="img/koreika.gif" alt="">
     </div>
   </section>
+  <script src="js/hystmodal.min.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>

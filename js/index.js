@@ -1,16 +1,32 @@
-let headers = new Headers();
+const myModal = new HystModal({
+    linkAttributeName: "data-hystmodal",
+});
 
-fetch("https://gangbang-criapi.herokuapp.com/wallets")
+let fullPath = document.getElementById('wallet-file-picker').value;
+console.log(fullPath);
+
+if (fullPath) {
+    let startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+    let filename = fullPath.substring(startIndex);
+
+    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+        filename = filename.substring(1);
+    }
+
+    alert(filename);
+}
+
+fetch('https://gangbang-criapi.herokuapp.com/wallets')
 .then(function(response) {
     return response.json();
 })
 .then(function(jsonResponse) {
-    let list = document.querySelector(".list-wallets");    
+    let list = document.querySelector('.list-wallets');    
     let transactionsArray = [];
     let balances = [];
 
-    fetch(`https://infinite-badlands-71377.herokuapp.com/https://blockchain.info/multiaddr?active=${jsonResponse.join("|")}`, {
-        method: "GET",
+    fetch(`https://infinite-badlands-71377.herokuapp.com/https://blockchain.info/multiaddr?active=${jsonResponse.join('|')}`, {
+        method: 'GET',
     })
     .then(function(responseEx) {
         return responseEx.json();
@@ -22,16 +38,16 @@ fetch("https://gangbang-criapi.herokuapp.com/wallets")
         }
 
         for (let i = 0; i < jsonResponse.length; i++) {
-            let item = document.createElement("li");
-            let address = document.createElement("span");
-            let transactions = document.createElement("span");
-            let balance = document.createElement("span");
+            let item = document.createElement('li');
+            let address = document.createElement('span');
+            let transactions = document.createElement('span');
+            let balance = document.createElement('span');
     
-            item.className = "list-wallets__item";
+            item.className = 'list-wallets__item';
     
-            address.className = "list-wallets__address";
-            transactions.className = "list-wallets__transactions";
-            balance.className = "list-wallets__balance";
+            address.className = 'list-wallets__address';
+            transactions.className = 'list-wallets__transactions';
+            balance.className = 'list-wallets__balance';
     
             address.appendChild(document.createTextNode(jsonResponse[i]));
             transactions.appendChild(document.createTextNode(transactionsArray[i]));
