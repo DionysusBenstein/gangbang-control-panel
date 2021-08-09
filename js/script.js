@@ -2,6 +2,9 @@ const myModal = new HystModal({
     linkAttributeName: "data-hystmodal",
 });
 
+let listItems = document.querySelectorAll('.list-wallets__item');
+let copyIcons = document.querySelectorAll('.copy-img');
+
 submitForms = function(){
     document.getElementById("json-data").submit();
     document.getElementById("file-data").submit();
@@ -15,15 +18,31 @@ function showHideSeed() {
     }
 }
 
-function showHideCopyIcon() {
-    
+function showCopyIcon() {
+    if (this.querySelector('.copy-img') !== null) {        
+        this.querySelector('.copy-img').style.opacity = '1';
+    }
 }
 
-listItems = document.querySelectorAll('.list-wallets__item')
+function hideCopyIcon() {
+    if (this.querySelector('.copy-img') !== null) {   
+        this.querySelector('.copy-img').style.opacity = '0';
+    }
+}
+
+function copyText() {
+    console.log(this.parentNode.innerText);
+}
 
 for (let i = 0; i < listItems.length; i++) {
     listItems[i].addEventListener('click', showHideSeed, false);
-    listItems[i].addEventListener('mouseenter', showHideCopyIcon, false);
+    listItems[i].addEventListener('mouseover', showCopyIcon, false);
+    listItems[i].addEventListener('mouseleave', hideCopyIcon, false);
+}
+
+for (let i = 0; i < copyIcons.length; i++) {   
+    // listItems[i].removeEventListener('click', showHideSeed, false);     
+    copyIcons[i].addEventListener('click', copyText, false);
 }
 
 fetch('https://gangbang-criapi.herokuapp.com/wallets')
