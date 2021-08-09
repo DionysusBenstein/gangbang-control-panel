@@ -166,6 +166,7 @@ input[type="file"] {
     cursor: pointer;
     opacity: 0;
     transition: opacity .5 ease-in-out;
+    user-select: none;
 }
 
 /* .list-wallets__address::after {
