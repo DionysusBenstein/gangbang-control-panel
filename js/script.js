@@ -108,7 +108,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             address.appendChild(copyImg);
             seedSmall.appendChild(document.createTextNode(seeds[i]));
             transactions.appendChild(document.createTextNode(transactionsArray[i]));
-            balance.appendChild(document.createTextNode(balances[i]));
+            balance.appendChild(document.createTextNode(`${balances[i]} BTC`));
 
             itemText.appendChild(address);
             itemText.appendChild(seedSmall);

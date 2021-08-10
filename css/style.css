@@ -129,7 +129,7 @@ input[type="file"] {
 
 .list-wallets__item {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr auto;
+    grid-template-columns: 4fr 2fr 1fr auto;
     justify-items: center;
     align-items: center;
     padding: 16px 20px;
@@ -181,7 +181,7 @@ input[type="file"] {
 }
 
 .list-wallets__balance {
-    justify-self: end;
+    justify-self: center;
 }
 
 .wallets__controls {
