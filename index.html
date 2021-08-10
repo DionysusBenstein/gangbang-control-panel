@@ -25,10 +25,18 @@
           <span class="list-wallets__address">Address</span>
           <span class="list-wallets__transactions">Transactions</span>
           <span class="list-wallets__balance">Total balance</span>
+          <div class="wallets__controls" style="visibility: hidden;">
+            <div class="wallets__download-btn">
+              <img src="img/icons/file_download_black_24dp.svg" alt="">
+            </div>
+            <div class="wallets__delete-btn">
+              <img src="img/icons/delete_black_24dp.svg" alt="">
+            </div>
+          </div>
         </li>
         
         <!-- List item example -->
-        <li class="list-wallets__item">
+        <!-- <li class="list-wallets__item">
           <div class="list-wallets__text">
             <span class="list-wallets__address" onclick="event.stopPropagation();">
               bc1q6w0eufkfhya4xjpyqnvkwcdt9a2kca8am097u1
@@ -38,69 +46,51 @@
           </div>
           <span class="list-wallets__transactions" onclick="event.stopPropagation();">10</span>
           <span class="list-wallets__balance" onclick="event.stopPropagation();">0.00003501 BTC</span>
-        </li>
-        
-        <!-- List item example -->
-        <li class="list-wallets__item">
-          <div class="list-wallets__text">
-            <span class="list-wallets__address" onclick="event.stopPropagation();">
-              bc1q6w0eufkfhya4xjpyqnvkwcdt9a2kca8am097u2
-              <img class="copy-img" src="img/icons/content_copy_black_24dp.svg" width="24px" alt="">
-            </span>
-            <small class="list-wallets__seed" onclick="event.stopPropagation();">present follow peace wheat custom wrist minute protect treat liberty cost end</small>
+          <div class="wallets__controls" onclick="event.stopPropagation();">
+            <div class="wallets__download-btn">
+              <img src="img/icons/file_download_black_24dp.svg" alt="">
+            </div>
+            <div class="wallets__delete-btn">
+              <img src="img/icons/delete_black_24dp.svg" alt="">
+            </div>
           </div>
-          <span class="list-wallets__transactions" onclick="event.stopPropagation();">10</span>
-          <span class="list-wallets__balance" onclick="event.stopPropagation();">0.00003501 BTC</span>
         </li>
-        
-        <!-- List item example -->
-        <li class="list-wallets__item">
-          <div class="list-wallets__text">
-            <span class="list-wallets__address" onclick="event.stopPropagation();">
-              bc1q6w0eufkfhya4xjpyqnvkwcdt9a2kca8am097u3
-              <img class="copy-img" src="img/icons/content_copy_black_24dp.svg" width="24px" alt="">
-            </span>
-            <small class="list-wallets__seed" onclick="event.stopPropagation();">present follow peace wheat custom wrist minute protect treat liberty cost end</small>
-          </div>
-          <span class="list-wallets__transactions" onclick="event.stopPropagation();">10</span>
-          <span class="list-wallets__balance" onclick="event.stopPropagation();">0.00003501 BTC</span>
-        </li>
+      </ul> -->
 
         <!-- Modal -->
-        <div class="hystmodal" id="myModal" aria-hidden="true">
-          <div class="hystmodal__wrap">
-              <div class="hystmodal__window" role="dialog" aria-modal="true">
-                <header class="hystmodal__header">
-                  <span class="hystmodal__title title">Add new wallet</span>
-                  <button data-hystclose class="hystmodal__close">Закрыть</button>
-                </header>
-                <div class="hystmodal__body">
-                  <form id="json-data" action="/">
-                    <label class="input-label">
-                      <div class="input-label__text">Address:</div>
-                      <input class="hystmodal__text-input" type="text">
-                    </label>
-                    <label class="input-label">
-                      <div class="input-label__text">Seed:</div>
-                      <textarea class="hystmodal__textarea textarea" rows="5"></textarea>
-                    </label>
-                  </form>
-                </div>
-                <div class="hystmodal__footer">
-                  <form id="file-data" action="/">
-                    <input id="wallet-file-picker" type="file">
-                    <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
-                  </form>
-                  <button class="hystmodal__btn submit-btn" type="submit" onclick="submitForms()">OK</button>
-                </div>
-              </div>
+      <div class="hystmodal" id="myModal" aria-hidden="true">
+        <div class="hystmodal__wrap">
+          <div class="hystmodal__window" role="dialog" aria-modal="true">
+            <header class="hystmodal__header">
+              <span class="hystmodal__title title">Add new wallet</span>
+              <button data-hystclose class="hystmodal__close">Закрыть</button>
+            </header>
+            <div class="hystmodal__body">
+              <form id="json-data" action="/">
+                <label class="input-label">
+                  <div class="input-label__text">Address:</div>
+                  <input class="hystmodal__text-input" type="text">
+                </label>
+                <label class="input-label">
+                  <div class="input-label__text">Seed:</div>
+                  <textarea class="hystmodal__textarea textarea" rows="5"></textarea>
+                </label>
+              </form>
+            </div>
+            <div class="hystmodal__footer">
+              <form id="file-data" action="/">
+                <input id="wallet-file-picker" type="file">
+                <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
+              </form>
+              <button class="hystmodal__btn submit-btn" type="submit" onclick="submitForms()">OK</button>
+            </div>
           </div>
+        </div>
       </div>
-      </ul>
     </div>
-    <div class="dasha">
+    <!-- <div class="dasha">
       <img src="img/koreika.gif" alt="">
-    </div>
+    </div> -->
   </section>
   <script src="js/hystmodal.min.js"></script>
   <script src="js/script.js"></script>

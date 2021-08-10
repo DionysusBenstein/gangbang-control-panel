@@ -129,7 +129,7 @@ input[type="file"] {
 
 .list-wallets__item {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr auto;
     justify-items: center;
     align-items: center;
     padding: 16px 20px;
@@ -165,23 +165,8 @@ input[type="file"] {
     margin-left: 8px;
     cursor: pointer;
     opacity: 0;
-    transition: opacity .5 ease-in-out;
     user-select: none;
 }
-
-/* .list-wallets__address::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -36px;
-    display: block;
-    width: 24px;
-    height: 24px;
-    background: url("../img/icons/content_copy_black_24dp.svg") no-repeat center;
-    opacity: 0;
-    transform: translateY(-50%);
-    cursor: pointer;
-} */
 
 .list-wallets__seed {
     display: none;
@@ -194,6 +179,26 @@ input[type="file"] {
 .list-wallets__seed_active .list-wallets__seed {
     display: block;
 }
+
+.list-wallets__balance {
+    justify-self: end;
+}
+
+.wallets__controls {
+    display: flex;
+    align-items: center;
+}
+
+.wallets__download-btn {
+    margin: 0 20px 0 30px;
+}
+
+.wallets__download-btn, .wallets__delete-btn {
+    user-select: none;
+    cursor: pointer;
+}
+
+/* :3 */
 
 .dasha {
     display: flex;
