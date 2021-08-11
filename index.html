@@ -61,31 +61,33 @@
         <!-- Modal -->
       <div class="hystmodal" id="myModal" aria-hidden="true">
         <div class="hystmodal__wrap">
-          <div class="hystmodal__window" role="dialog" aria-modal="true">
-            <header class="hystmodal__header">
-              <span class="hystmodal__title title">Add new wallet</span>
-              <button data-hystclose class="hystmodal__close">Закрыть</button>
-            </header>
-            <div class="hystmodal__body">
-              <form id="json-data" action="/">
-                <label class="input-label">
-                  <div class="input-label__text">Address:</div>
-                  <input class="hystmodal__text-input" type="text">
-                </label>
-                <label class="input-label">
-                  <div class="input-label__text">Seed:</div>
-                  <textarea class="hystmodal__textarea textarea" rows="5"></textarea>
-                </label>
-              </form>
+          <form id="json-data" method="POST" action="http://localhost:3000/wallets/add" enctype="multipart/form-data">
+            <div class="hystmodal__window" role="dialog" aria-modal="true">            
+              <header class="hystmodal__header">
+                <span class="hystmodal__title title">Add new wallet</span>
+                <button data-hystclose class="hystmodal__close">Закрыть</button>
+              </header>
+              <div class="hystmodal__body">
+                <!-- <form id="json-data" method="POST" action="http://localhost:3000/wallets/add"> -->
+                  <label class="input-label">
+                    <div class="input-label__text">Address:</div>
+                    <input class="hystmodal__text-input" name="address" type="text">
+                  </label>
+                  <label class="input-label">
+                    <div class="input-label__text">Seed:</div>
+                    <textarea class="hystmodal__textarea textarea" name="seed" rows="5"></textarea>
+                  </label>
+                <!-- </form> -->
+              </div>
+              <div class="hystmodal__footer">
+                <!-- <form id="file-data" method="POST" action="http://localhost:3000/wallets/add"> -->
+                  <input id="wallet-file-picker" type="file" name="wallet-file">
+                  <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
+                <!-- </form> -->
+                <button class="hystmodal__btn submit-btn" type="submit">OK</button>
+              </div>
             </div>
-            <div class="hystmodal__footer">
-              <form id="file-data" action="/">
-                <input id="wallet-file-picker" type="file">
-                <label class="file-wrapper" for="wallet-file-picker">Choose file</label>
-              </form>
-              <button class="hystmodal__btn submit-btn" type="submit" onclick="submitForms()">OK</button>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

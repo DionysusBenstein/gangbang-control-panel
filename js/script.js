@@ -1,14 +1,8 @@
 const myModal = new HystModal({
-    linkAttributeName: "data-hystmodal",
+    linkAttributeName: 'data-hystmodal',
 });
 
-submitForms = function(){
-    document.getElementById("json-data").submit();
-    document.getElementById("file-data").submit();
-}
-
 function showHideSeed() {
-    console.log('click');
     if (this.classList.contains('list-wallets__seed_active')) {
         this.classList.remove('list-wallets__seed_active');
     } else {
@@ -36,13 +30,39 @@ function hideCopyIcon() {
 
 function deleteWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
-    fetch(`https://gangbang-criapi.herokuapp.com/wallets/delete/${address}`, { method: 'DELETE'});
-    location.reload();
+
+    fetch(`https://gangbang-criapi.herokuapp.com/wallets/delete/${address}`, { method: 'DELETE'})
+    .then(function (response) {
+        return response;  
+    })
+    .then(() => {
+        location.reload();
+    });
+}
+
+function downloadWallet() {
+    let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
+
+    fetch(`https://gangbang-criapi.herokuapp.com/wallets/download/${address}`, { method: 'GET', headers: {
+        'Content-Disposition': `attachment; filename="${address}"`
+    }})
+    .then(res => res.blob())
+    .then(blob => {
+        let file = window.URL.createObjectURL(blob);
+        // let file = new File([blob], address);
+        // file = window.URL.createObjectURL(file);
+        window.location.assign(file);
+    });
+    
+
+    console.log(`File "${address}" is downloading!`); 
 }
 
 function copyText() {
     console.log(this.parentNode.innerText);
 }
+
+//https://gangbang-criapi.herokuapp.com/wallets
 
 fetch('https://gangbang-criapi.herokuapp.com/wallets')
 .then(function(response) {
@@ -117,6 +137,8 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             balance.setAttribute('onclick', 'event.stopPropagation();');
             controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
+            console.log(jsonResponseEx.addresses[i].address);
+
             address.appendChild(document.createTextNode(jsonResponseEx.addresses[i].address));
             address.appendChild(copyImg);
             seedSmall.appendChild(document.createTextNode(seeds[i]));
@@ -143,12 +165,14 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
         let listItems = document.querySelectorAll('.list-wallets__item');
         let copyIcons = document.querySelectorAll('.copy-img');
         let deleteBtns = document.querySelectorAll('.wallets__delete-btn');
+        let downloadBtns = document.querySelectorAll('.wallets__download-btn');
         
         for (let i = 0; i < listItems.length; i++) {
             listItems[i].addEventListener('click', showHideSeed, false);
             listItems[i].addEventListener('mouseover', showCopyIcon, false);
             listItems[i].addEventListener('mouseleave', hideCopyIcon, false);
             deleteBtns[i].addEventListener('click', deleteWallet, false);
+            downloadBtns[i].addEventListener('click', downloadWallet, false);
         }
         
         for (let i = 0; i < copyIcons.length; i++) {   
