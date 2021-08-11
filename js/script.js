@@ -34,6 +34,12 @@ function hideCopyIcon() {
     }
 }
 
+function deleteWallet() {
+    let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
+    fetch(`https://gangbang-criapi.herokuapp.com/wallets/delete/${address}`, { method: 'DELETE'});
+    location.reload();
+}
+
 function copyText() {
     console.log(this.parentNode.innerText);
 }
@@ -50,8 +56,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
     let balances = [];
 
     for (let i = 0; i < jsonResponse.length; i++) {
-        addresses.push(jsonResponse[i].address);      
-        seeds.push(jsonResponse[i].seed);
+        addresses.push(jsonResponse[i].address);
     }
 
     fetch(`https://infinite-badlands-71377.herokuapp.com/https://blockchain.info/multiaddr?active=${addresses.join('|')}`, {
@@ -60,10 +65,18 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
     .then(function(responseEx) {
         return responseEx.json();
     })
-    .then(function(jsonResponseEx) {        
+    .then(function(jsonResponseEx) {            
         for (let j = 0; j < jsonResponseEx.addresses.length; j++) {
             transactionsArray.push(jsonResponseEx.addresses[j].n_tx);  
-            balances.push(jsonResponseEx.addresses[j].final_balance);
+            balances.push(jsonResponseEx.addresses[j].final_balance);    
+        }
+
+        for (let k = 0; k < jsonResponseEx.addresses.length; k++) {
+            for (let j = 0; j < jsonResponse.length; j++) {jsonResponse
+                if (jsonResponse[j].address === jsonResponseEx.addresses[k].address) {
+                    seeds.push(jsonResponse[j].seed);
+                }
+            }
         }
 
         for (let i = 0; i < jsonResponse.length; i++) {
@@ -104,7 +117,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             balance.setAttribute('onclick', 'event.stopPropagation();');
             controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
-            address.appendChild(document.createTextNode(addresses[i]));
+            address.appendChild(document.createTextNode(jsonResponseEx.addresses[i].address));
             address.appendChild(copyImg);
             seedSmall.appendChild(document.createTextNode(seeds[i]));
             transactions.appendChild(document.createTextNode(transactionsArray[i]));
@@ -129,11 +142,13 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
 
         let listItems = document.querySelectorAll('.list-wallets__item');
         let copyIcons = document.querySelectorAll('.copy-img');
+        let deleteBtns = document.querySelectorAll('.wallets__delete-btn');
         
         for (let i = 0; i < listItems.length; i++) {
             listItems[i].addEventListener('click', showHideSeed, false);
             listItems[i].addEventListener('mouseover', showCopyIcon, false);
             listItems[i].addEventListener('mouseleave', hideCopyIcon, false);
+            deleteBtns[i].addEventListener('click', deleteWallet, false);
         }
         
         for (let i = 0; i < copyIcons.length; i++) {   
