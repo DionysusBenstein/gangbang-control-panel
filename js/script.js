@@ -130,29 +130,29 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             balance.setAttribute('onclick', 'event.stopPropagation();');
             controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
-            console.log(jsonResponseEx.addresses[i].address);
+            if (jsonResponseEx.addresses[i].address !== undefined) {
+                address.appendChild(document.createTextNode(jsonResponseEx.addresses[i].address));
+                address.appendChild(copyImg);
+                seedSmall.appendChild(document.createTextNode(seeds[i]));
+                transactions.appendChild(document.createTextNode(transactionsArray[i]));
+                balance.appendChild(document.createTextNode(`${balances[i]} BTC`));
 
-            address.appendChild(document.createTextNode(jsonResponseEx.addresses[i].address));
-            address.appendChild(copyImg);
-            seedSmall.appendChild(document.createTextNode(seeds[i]));
-            transactions.appendChild(document.createTextNode(transactionsArray[i]));
-            balance.appendChild(document.createTextNode(`${balances[i]} BTC`));
+                itemText.appendChild(address);
+                itemText.appendChild(seedSmall);
 
-            itemText.appendChild(address);
-            itemText.appendChild(seedSmall);
+                downloadBtn.appendChild(downloadBtnImg);
+                deleteBtn.appendChild(deleteBtnImg);
 
-            downloadBtn.appendChild(downloadBtnImg);
-            deleteBtn.appendChild(deleteBtnImg);
-
-            controlsBlock.appendChild(downloadBtn);
-            controlsBlock.appendChild(deleteBtn);
+                controlsBlock.appendChild(downloadBtn);
+                controlsBlock.appendChild(deleteBtn);
     
-            item.appendChild(itemText);
-            item.appendChild(transactions);
-            item.appendChild(balance);
-            item.appendChild(controlsBlock);
+                item.appendChild(itemText);
+                item.appendChild(transactions);
+                item.appendChild(balance);
+                item.appendChild(controlsBlock);
     
-            list.appendChild(item);
+                list.appendChild(item);
+            }
         }
 
         let listItems = document.querySelectorAll('.list-wallets__item');
