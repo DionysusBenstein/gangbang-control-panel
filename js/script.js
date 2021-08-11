@@ -43,17 +43,12 @@ function deleteWallet() {
 function downloadWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
 
-    fetch(`https://gangbang-criapi.herokuapp.com/wallets/download/${address}`, { method: 'GET', headers: {
-        'Content-Disposition': `attachment; filename="${address}"`
-    }})
+    fetch(`https://gangbang-criapi.herokuapp.com/wallets/download/${address}`, { method: 'GET' })
     .then(res => res.blob())
     .then(blob => {
         let file = window.URL.createObjectURL(blob);
-        // let file = new File([blob], address);
-        // file = window.URL.createObjectURL(file);
         window.location.assign(file);
-    });
-    
+    });    
 
     console.log(`File "${address}" is downloading!`); 
 }
@@ -61,8 +56,6 @@ function downloadWallet() {
 function copyText() {
     console.log(this.parentNode.innerText);
 }
-
-//https://gangbang-criapi.herokuapp.com/wallets
 
 fetch('https://gangbang-criapi.herokuapp.com/wallets')
 .then(function(response) {
