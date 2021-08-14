@@ -36,7 +36,7 @@ function hideCopyIcon() {
 
 function deleteWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
-
+    console.log(`http://cribots.xyz/wallets/delete/${address}`);
     fetch(`http://cribots.xyz/wallets/delete/${address}`, { method: 'DELETE'})
     .then(function (response) {
         return response;  

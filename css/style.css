@@ -150,10 +150,13 @@ input[type="file"] {
 }
 
 .wallets__icon {
-    align-self: start;
-    display: flex;
-    align-items: center;
     margin-right: 12px;
+    user-select: none;
+    align-self: start;
+}
+
+.wallets__icon img {
+    display: block;
 }
 
 .list-wallets__item:hover {
@@ -205,8 +208,8 @@ input[type="file"] {
 }
 
 .wallets__controls {
+    align-self: start;
     display: flex;
-    align-items: center;
 }
 
 .wallets__download-btn {
@@ -216,6 +219,10 @@ input[type="file"] {
 .wallets__download-btn, .wallets__delete-btn {
     user-select: none;
     cursor: pointer;
+}
+
+.wallets__download-btn img, .wallets__delete-btn img{
+    display: block;
 }
 
 /* :3 */
