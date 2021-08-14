@@ -37,7 +37,7 @@ function hideCopyIcon() {
 function deleteWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
 
-    fetch(`http://3.23.96.196:3000/walglets/delete/${address}`, { method: 'DELETE'})
+    fetch(`http://cribots.xyz/wallets/delete/${address}`, { method: 'DELETE'})
     .then(function (response) {
         return response;  
     })
@@ -49,7 +49,7 @@ function deleteWallet() {
 function downloadWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
 
-    fetch(`http://3.23.96.196:3000/wallets/download/${address}`, { method: 'GET' })
+    fetch(`http://cribots.xyz/wallets/download/${address}`, { method: 'GET' })
     .then(res => res.blob())
     .then(blob => {
         let file = window.URL.createObjectURL(blob);
@@ -63,7 +63,7 @@ function copyText() {
     console.log(this.parentNode.innerText);
 }
 
-fetch('https:/gangbang-criapi.herokuapp.com/wallets')
+fetch('http://cribots.xyz/wallets')
 .then(function(response) {
     return response.json();
 })
