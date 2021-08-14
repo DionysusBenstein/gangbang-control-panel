@@ -2,6 +2,12 @@ const myModal = new HystModal({
     linkAttributeName: 'data-hystmodal',
 });
 
+function updateSelect() {
+    let selectElem = document.querySelector('.hystmodal__select-input');
+    let selectImg = document.querySelector('.coin-icon');
+    selectImg.src = `../img/icons/cryptocurrencies/${selectElem.options[selectElem.selectedIndex].value}.svg`    
+}
+
 function showHideSeed() {
     if (this.classList.contains('list-wallets__seed_active')) {
         this.classList.remove('list-wallets__seed_active');
@@ -31,7 +37,7 @@ function hideCopyIcon() {
 function deleteWallet() {
     let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
 
-    fetch(`https://gangbang-criapi.herokuapp.com/wallets/delete/${address}`, { method: 'DELETE'})
+    fetch(`https://gangbang-criapi.herokuapp.com/walglets/delete/${address}`, { method: 'DELETE'})
     .then(function (response) {
         return response;  
     })
@@ -57,7 +63,7 @@ function copyText() {
     console.log(this.parentNode.innerText);
 }
 
-fetch('https://gangbang-criapi.herokuapp.com/wallets')
+fetch('https:/gangbang-criapi.herokuapp.com/wallets')
 .then(function(response) {
     return response.json();
 })
@@ -67,6 +73,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
     let seeds = [];
     let transactionsArray = [];
     let balances = [];
+    let coinTypes = [];
 
     for (let i = 0; i < jsonResponse.length; i++) {
         addresses.push(jsonResponse[i].address);
@@ -88,6 +95,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             for (let j = 0; j < jsonResponse.length; j++) {jsonResponse
                 if (jsonResponse[j].address === jsonResponseEx.addresses[k].address) {
                     seeds.push(jsonResponse[j].seed);
+                    coinTypes.push(jsonResponse[j].coin);
                 }
             }
         }
@@ -105,10 +113,13 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             let deleteBtn = document.createElement('div');
             let downloadBtnImg = document.createElement('img');
             let deleteBtnImg = document.createElement('img');
+            let coinTypeContainer = document.createElement('div');
+            let coinTypeImg = document.createElement('img');
     
             copyImg.src = '../img/icons/content_copy_black_24dp.svg';
             downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
             deleteBtnImg.src = '../img/icons/delete_black_24dp.svg';
+            coinTypeImg.src = `../img/icons/cryptocurrencies/${coinTypes[i]}.svg`
             
             item.className = 'list-wallets__item';
 
@@ -118,6 +129,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
             deleteBtn.className = 'wallets__delete-btn';
             copyImg.className = 'copy-img';
 
+            coinTypeContainer.className = 'wallets__icon';
             itemText.className = 'list-wallets__text';    
             address.className = 'list-wallets__address';
 
@@ -136,6 +148,7 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
                 seedSmall.appendChild(document.createTextNode(seeds[i]));
                 transactions.appendChild(document.createTextNode(transactionsArray[i]));
                 balance.appendChild(document.createTextNode(`${balances[i]} BTC`));
+                coinTypeContainer.appendChild(coinTypeImg);
 
                 itemText.appendChild(address);
                 itemText.appendChild(seedSmall);
@@ -145,7 +158,8 @@ fetch('https://gangbang-criapi.herokuapp.com/wallets')
 
                 controlsBlock.appendChild(downloadBtn);
                 controlsBlock.appendChild(deleteBtn);
-    
+                
+                item.appendChild(coinTypeContainer);
                 item.appendChild(itemText);
                 item.appendChild(transactions);
                 item.appendChild(balance);

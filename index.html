@@ -37,6 +37,9 @@
         
         <!-- List item example -->
         <!-- <li class="list-wallets__item">
+          <div class="wallets__icon">
+            <img src="img/icons/cryptocurrencies/btc.svg" alt="">
+          </div>
           <div class="list-wallets__text">
             <span class="list-wallets__address" onclick="event.stopPropagation();">
               bc1q6w0eufkfhya4xjpyqnvkwcdt9a2kca8am097u1
@@ -75,6 +78,19 @@
                 <label class="input-label">
                   <div class="input-label__text">Seed:</div>
                   <textarea class="hystmodal__textarea textarea" name="seed" rows="5"></textarea>
+                </label>
+                <label class="input-label select-label">
+                  <img class="coin-icon" src="img/icons/cryptocurrencies/btc.svg" alt="">
+                  <select class="hystmodal__select-input select" name="coin" onchange="updateSelect()">
+                    <option value="btc">Bitcoin</option>
+                    <option value="doge">Dogecoin</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="ltc">Litecoin</option>
+                    <option value="trx">TRON</option>
+                    <option value="usdt">Tether</option>
+                    <option value="xmr">Monero</option>
+                    <option value="xrp">Ripple</option>
+                  </select>
                 </label>
               </div>
               <div class="hystmodal__footer">
