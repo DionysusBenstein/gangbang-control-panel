@@ -71,121 +71,85 @@ fetch('http://cribots.xyz/wallets')
     let list = document.querySelector('.list-wallets');    
     let addresses = [];
     let seeds = [];
-    let transactionsArray = [];
-    let balances = [];
     let coinTypes = [];
 
     for (let i = 0; i < jsonResponse.length; i++) {
         addresses.push(jsonResponse[i].address);
+        seeds.push(jsonResponse[i].seed);
+        coinTypes.push(jsonResponse[i].coin);
     }
 
-    fetch(`https://infinite-badlands-71377.herokuapp.com/https://blockchain.info/multiaddr?active=${addresses.join('|')}`, {
-        method: 'GET',
-    })
-    .then(function(responseEx) {
-        return responseEx.json();
-    })
-    .then(function(jsonResponseEx) {            
-        for (let j = 0; j < jsonResponseEx.addresses.length; j++) {
-            transactionsArray.push(jsonResponseEx.addresses[j].n_tx);  
-            balances.push(jsonResponseEx.addresses[j].final_balance);    
-        }
+    for (let i = 0; i < jsonResponse.length; i++) {
+        let item = document.createElement('li');
+        let itemText = document.createElement('div');
+        let copyImg = document.createElement('img');
+        let seedSmall = document.createElement('small');
+        let address = document.createElement('span');
+        let controlsBlock = document.createElement('div');
+        let downloadBtn = document.createElement('div');
+        let deleteBtn = document.createElement('div');
+        let downloadBtnImg = document.createElement('img');
+        let deleteBtnImg = document.createElement('img');
+        let coinTypeContainer = document.createElement('div');
+        let coinTypeImg = document.createElement('img');
 
-        for (let k = 0; k < jsonResponseEx.addresses.length; k++) {
-            for (let j = 0; j < jsonResponse.length; j++) {jsonResponse
-                if (jsonResponse[j].address === jsonResponseEx.addresses[k].address) {
-                    seeds.push(jsonResponse[j].seed);
-                    coinTypes.push(jsonResponse[j].coin);
-                }
-            }
-        }
+        copyImg.src = '../img/icons/content_copy_black_24dp.svg';
+        downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
+        deleteBtnImg.src = '../img/icons/delete_black_24dp.svg';
+        coinTypeImg.src = `../img/icons/cryptocurrencies/${coinTypes[i]}.svg`
+        
+        item.className = 'list-wallets__item';
 
-        for (let i = 0; i < jsonResponse.length; i++) {
-            let item = document.createElement('li');
-            let itemText = document.createElement('div');
-            let copyImg = document.createElement('img');
-            let seedSmall = document.createElement('small');
-            let address = document.createElement('span');
-            let transactions = document.createElement('span');
-            let balance = document.createElement('span');
-            let controlsBlock = document.createElement('div');
-            let downloadBtn = document.createElement('div');
-            let deleteBtn = document.createElement('div');
-            let downloadBtnImg = document.createElement('img');
-            let deleteBtnImg = document.createElement('img');
-            let coinTypeContainer = document.createElement('div');
-            let coinTypeImg = document.createElement('img');
-    
-            copyImg.src = '../img/icons/content_copy_black_24dp.svg';
-            downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
-            deleteBtnImg.src = '../img/icons/delete_black_24dp.svg';
-            coinTypeImg.src = `../img/icons/cryptocurrencies/${coinTypes[i]}.svg`
+        seedSmall.className = 'list-wallets__seed';
+        controlsBlock.className = 'wallets__controls';
+        downloadBtn.className = 'wallets__download-btn';
+        deleteBtn.className = 'wallets__delete-btn';
+        copyImg.className = 'copy-img';
+
+        coinTypeContainer.className = 'wallets__icon';
+        itemText.className = 'list-wallets__text';    
+        address.className = 'list-wallets__address';
+
+        address.setAttribute('onclick', 'event.stopPropagation();');
+        seedSmall.setAttribute('onclick', 'event.stopPropagation();');
+        controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
+
+        address.appendChild(document.createTextNode(addresses[i]));
+        address.appendChild(copyImg);
+        seedSmall.appendChild(document.createTextNode(seeds[i]));
+        coinTypeContainer.appendChild(coinTypeImg);
+
+        itemText.appendChild(address);
+        itemText.appendChild(seedSmall);
+
+        downloadBtn.appendChild(downloadBtnImg);
+        deleteBtn.appendChild(deleteBtnImg);
+
+        controlsBlock.appendChild(downloadBtn);
+        controlsBlock.appendChild(deleteBtn);
             
-            item.className = 'list-wallets__item';
+        item.appendChild(coinTypeContainer);
+        item.appendChild(itemText);
+        item.appendChild(controlsBlock);
 
-            seedSmall.className = 'list-wallets__seed';
-            controlsBlock.className = 'wallets__controls';
-            downloadBtn.className = 'wallets__download-btn';
-            deleteBtn.className = 'wallets__delete-btn';
-            copyImg.className = 'copy-img';
+        list.appendChild(item);
+        
+    }
 
-            coinTypeContainer.className = 'wallets__icon';
-            itemText.className = 'list-wallets__text';    
-            address.className = 'list-wallets__address';
-
-            transactions.className = 'list-wallets__transactions';
-            balance.className = 'list-wallets__balance';
-
-            address.setAttribute('onclick', 'event.stopPropagation();');
-            seedSmall.setAttribute('onclick', 'event.stopPropagation();');
-            transactions.setAttribute('onclick', 'event.stopPropagation();');
-            balance.setAttribute('onclick', 'event.stopPropagation();');
-            controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
-
-            if (jsonResponseEx.addresses[i].address !== undefined) {
-                address.appendChild(document.createTextNode(jsonResponseEx.addresses[i].address));
-                address.appendChild(copyImg);
-                seedSmall.appendChild(document.createTextNode(seeds[i]));
-                transactions.appendChild(document.createTextNode(transactionsArray[i]));
-                balance.appendChild(document.createTextNode(`${balances[i]} BTC`));
-                coinTypeContainer.appendChild(coinTypeImg);
-
-                itemText.appendChild(address);
-                itemText.appendChild(seedSmall);
-
-                downloadBtn.appendChild(downloadBtnImg);
-                deleteBtn.appendChild(deleteBtnImg);
-
-                controlsBlock.appendChild(downloadBtn);
-                controlsBlock.appendChild(deleteBtn);
-                
-                item.appendChild(coinTypeContainer);
-                item.appendChild(itemText);
-                item.appendChild(transactions);
-                item.appendChild(balance);
-                item.appendChild(controlsBlock);
+    let listItems = document.querySelectorAll('.list-wallets__item');
+    let copyIcons = document.querySelectorAll('.copy-img');
+    let deleteBtns = document.querySelectorAll('.wallets__delete-btn');
+    let downloadBtns = document.querySelectorAll('.wallets__download-btn');
     
-                list.appendChild(item);
-            }
-        }
-
-        let listItems = document.querySelectorAll('.list-wallets__item');
-        let copyIcons = document.querySelectorAll('.copy-img');
-        let deleteBtns = document.querySelectorAll('.wallets__delete-btn');
-        let downloadBtns = document.querySelectorAll('.wallets__download-btn');
-        
-        for (let i = 0; i < listItems.length; i++) {
-            listItems[i].addEventListener('click', showHideSeed, false);
-            listItems[i].addEventListener('mouseover', showCopyIcon, false);
-            listItems[i].addEventListener('mouseleave', hideCopyIcon, false);
-            deleteBtns[i].addEventListener('click', deleteWallet, false);
-            downloadBtns[i].addEventListener('click', downloadWallet, false);
-        }
-        
-        for (let i = 0; i < copyIcons.length; i++) {   
-            copyIcons[i].addEventListener('click', copyText, false);
-        }
-
-    });
+    for (let i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', showHideSeed, false);
+        listItems[i].addEventListener('mouseover', showCopyIcon, false);
+        listItems[i].addEventListener('mouseleave', hideCopyIcon, false);
+        deleteBtns[i].addEventListener('click', deleteWallet, false);
+        downloadBtns[i].addEventListener('click', downloadWallet, false);
+    }
+    
+    for (let i = 0; i < copyIcons.length; i++) {   
+        copyIcons[i].addEventListener('click', copyText, false);
+    }
 });
-
