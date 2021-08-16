@@ -35,7 +35,8 @@ function hideCopyIcon() {
 }
 
 function deleteWallet() {
-    let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
+    let address = this.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].nodeValue;
+
     console.log(`http://cribots.xyz/wallets/delete/${address}`);
     fetch(`http://cribots.xyz/wallets/delete/${address}`, { method: 'DELETE'})
     .then(function (response) {
@@ -47,7 +48,7 @@ function deleteWallet() {
 }
 
 function downloadWallet() {
-    let address = this.parentNode.parentNode.querySelector('.list-wallets__address').innerText;
+    let address = this.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].nodeValue;
 
     fetch(`http://cribots.xyz/wallets/download/${address}`, { method: 'GET' })
     .then(res => res.blob())
@@ -72,11 +73,13 @@ function hideCopyMessage() {
 function copyText() {
     let text = this.parentNode.childNodes[0].nodeValue;
     let currentListItem = this.parentNode.parentNode.parentNode;
+    let msgContainer = currentListItem.querySelector('.copy-text-msg');
 
     const showCopyMessageBound = showCopyMessage.bind(this);
     const hideCopyMessageBound = hideCopyMessage.bind(this);
 
-    navigator.clipboard.writeText(text).then(function() {
+    navigator.clipboard.writeText(text).then(function() {    
+        msgContainer.appendChild(document.createTextNode('Text copied!'));
         console.log('Async: Copying to clipboard was successful!');
         showCopyMessageBound();
         currentListItem.addEventListener('mouseleave', hideCopyMessageBound, false);
@@ -139,7 +142,6 @@ fetch('http://cribots.xyz/wallets')
         controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
         address.appendChild(document.createTextNode(addresses[i]));
-        msgContainer.appendChild(document.createTextNode('Text copied!'));
         address.appendChild(copyImg);
         address.appendChild(msgContainer);
         seedSmall.appendChild(document.createTextNode(seeds[i]));
