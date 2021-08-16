@@ -179,6 +179,17 @@ input[type="file"] {
     justify-self: start;
 }
 
+.copy-text-msg {
+    margin-left: 8px;
+    opacity: 0;
+    user-select: none;
+    transition: opacity .1s ease-in-out;
+}
+
+.copy-text-msg_show {
+    opacity: 1;
+}
+
 .list-wallets__item:first-child .list-wallets__address::after {
     display: none;
 }

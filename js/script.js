@@ -59,8 +59,30 @@ function downloadWallet() {
     console.log(`File "${address}" is downloading!`); 
 }
 
+function showCopyMessage() {
+    let msg = this.parentNode.querySelector('.copy-text-msg');
+    msg.classList.add('copy-text-msg_show');
+}
+
+function hideCopyMessage() {
+    let msg = this.parentNode.querySelector('.copy-text-msg');
+    msg.classList.remove('copy-text-msg_show');
+}
+
 function copyText() {
-    console.log(this.parentNode.innerText);
+    let text = this.parentNode.childNodes[0].nodeValue;
+    let currentListItem = this.parentNode.parentNode.parentNode;
+
+    const showCopyMessageBound = showCopyMessage.bind(this);
+    const hideCopyMessageBound = hideCopyMessage.bind(this);
+
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+        showCopyMessageBound();
+        currentListItem.addEventListener('mouseleave', hideCopyMessageBound, false);
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+    });
 }
 
 fetch('http://cribots.xyz/wallets')
@@ -92,6 +114,7 @@ fetch('http://cribots.xyz/wallets')
         let deleteBtnImg = document.createElement('img');
         let coinTypeContainer = document.createElement('div');
         let coinTypeImg = document.createElement('img');
+        let msgContainer = document.createElement('div');
 
         copyImg.src = '../img/icons/content_copy_black_24dp.svg';
         downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
@@ -109,13 +132,16 @@ fetch('http://cribots.xyz/wallets')
         coinTypeContainer.className = 'wallets__icon';
         itemText.className = 'list-wallets__text';    
         address.className = 'list-wallets__address';
+        msgContainer.classList = 'copy-text-msg';
 
         address.setAttribute('onclick', 'event.stopPropagation();');
         seedSmall.setAttribute('onclick', 'event.stopPropagation();');
         controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
         address.appendChild(document.createTextNode(addresses[i]));
+        msgContainer.appendChild(document.createTextNode('Text copied!'));
         address.appendChild(copyImg);
+        address.appendChild(msgContainer);
         seedSmall.appendChild(document.createTextNode(seeds[i]));
         coinTypeContainer.appendChild(coinTypeImg);
 
@@ -132,8 +158,7 @@ fetch('http://cribots.xyz/wallets')
         item.appendChild(itemText);
         item.appendChild(controlsBlock);
 
-        list.appendChild(item);
-        
+        list.appendChild(item);        
     }
 
     let listItems = document.querySelectorAll('.list-wallets__item');
