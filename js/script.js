@@ -78,8 +78,11 @@ function copyText() {
     const showCopyMessageBound = showCopyMessage.bind(this);
     const hideCopyMessageBound = hideCopyMessage.bind(this);
 
-    navigator.clipboard.writeText(text).then(function() {    
-        msgContainer.appendChild(document.createTextNode('Text copied!'));
+    navigator.clipboard.writeText(text).then(function() {
+        if (msgContainer.innerHTML === '') {
+            msgContainer.appendChild(document.createTextNode('Text copied! '));            
+        }
+        
         console.log('Async: Copying to clipboard was successful!');
         showCopyMessageBound();
         currentListItem.addEventListener('mouseleave', hideCopyMessageBound, false);
