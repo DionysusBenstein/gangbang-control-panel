@@ -121,6 +121,7 @@ fetch('https://cribots.xyz/wallets')
         let coinTypeContainer = document.createElement('div');
         let coinTypeImg = document.createElement('img');
         let msgContainer = document.createElement('div');
+        let addressWrapper = document.createElement('div');
 
         copyImg.src = '../img/icons/content_copy_black_24dp.svg';
         downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
@@ -144,7 +145,8 @@ fetch('https://cribots.xyz/wallets')
         seedSmall.setAttribute('onclick', 'event.stopPropagation();');
         controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
 
-        address.appendChild(document.createTextNode(addresses[i]));
+        addressWrapper.appendChild(document.createTextNode(addresses[i]));
+        address.appendChild(addressWrapper);
         address.appendChild(copyImg);
         address.appendChild(msgContainer);
         seedSmall.appendChild(document.createTextNode(seeds[i]));
