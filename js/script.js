@@ -92,10 +92,10 @@ function copyText() {
 }
 
 fetch('https://cribots.xyz/wallets')
-.then(function(response) {
+.then(response => {
     return response.json();
 })
-.then(function(jsonResponse) {
+.then(jsonResponse => {
     let list = document.querySelector('.list-wallets');    
     let addresses = [];
     let seeds = [];
