@@ -108,64 +108,30 @@ fetch('https://cribots.xyz/wallets')
     }
 
     for (let i = 0; i < jsonResponse.length; i++) {
-        let item = document.createElement('li');
-        let itemText = document.createElement('div');
-        let copyImg = document.createElement('img');
-        let seedSmall = document.createElement('small');
-        let address = document.createElement('span');
-        let controlsBlock = document.createElement('div');
-        let downloadBtn = document.createElement('div');
-        let deleteBtn = document.createElement('div');
-        let downloadBtnImg = document.createElement('img');
-        let deleteBtnImg = document.createElement('img');
-        let coinTypeContainer = document.createElement('div');
-        let coinTypeImg = document.createElement('img');
-        let msgContainer = document.createElement('div');
-        let addressWrapper = document.createElement('div');
+        const listItemTemplate = 
+        `<li class="list-wallets__item">
+          <div class="wallets__icon">
+            <img src="img/icons/cryptocurrencies/${coinTypes[i]}.svg" alt="">
+          </div>
+          <div class="list-wallets__text">
+            <span class="list-wallets__address" onclick="event.stopPropagation();">
+              ${addresses[i]}
+              <img class="copy-img" src="img/icons/content_copy_black_24dp.svg" width="24px" alt="">
+            </span>
+            <small class="list-wallets__seed" onclick="event.stopPropagation();">${seeds[i]}</small>
+          </div>
+          <div class="wallets__controls" onclick="event.stopPropagation();">
+            <div class="wallets__download-btn">
+              <img src="img/icons/file_download_black_24dp.svg" alt="">
+            </div>
+            <div class="wallets__delete-btn">
+              <img src="img/icons/delete_black_24dp.svg" alt="">
+            </div>
+          </div>
+        </li>`
 
-        copyImg.src = '../img/icons/content_copy_black_24dp.svg';
-        downloadBtnImg.src = '../img/icons/file_download_black_24dp.svg';
-        deleteBtnImg.src = '../img/icons/delete_black_24dp.svg';
-        coinTypeImg.src = `../img/icons/cryptocurrencies/${coinTypes[i]}.svg`
-        
-        item.className = 'list-wallets__item';
-
-        seedSmall.className = 'list-wallets__seed';
-        controlsBlock.className = 'wallets__controls';
-        downloadBtn.className = 'wallets__download-btn';
-        deleteBtn.className = 'wallets__delete-btn';
-        copyImg.className = 'copy-img';
-
-        coinTypeContainer.className = 'wallets__icon';
-        itemText.className = 'list-wallets__text';    
-        address.className = 'list-wallets__address';
-        msgContainer.classList = 'copy-text-msg';
-
-        address.setAttribute('onclick', 'event.stopPropagation();');
-        seedSmall.setAttribute('onclick', 'event.stopPropagation();');
-        controlsBlock.setAttribute('onclick', 'event.stopPropagation();');
-
-        addressWrapper.appendChild(document.createTextNode(addresses[i]));
-        address.appendChild(addressWrapper);
-        address.appendChild(copyImg);
-        address.appendChild(msgContainer);
-        seedSmall.appendChild(document.createTextNode(seeds[i]));
-        coinTypeContainer.appendChild(coinTypeImg);
-
-        itemText.appendChild(address);
-        itemText.appendChild(seedSmall);
-
-        downloadBtn.appendChild(downloadBtnImg);
-        deleteBtn.appendChild(deleteBtnImg);
-
-        controlsBlock.appendChild(downloadBtn);
-        controlsBlock.appendChild(deleteBtn);
-            
-        item.appendChild(coinTypeContainer);
-        item.appendChild(itemText);
-        item.appendChild(controlsBlock);
-
-        list.appendChild(item);        
+        let listNode = new DOMParser().parseFromString(listItemTemplate, 'text/html').body.firstChild;
+        list.appendChild(listNode);  
     }
 
     let listItems = document.querySelectorAll('.list-wallets__item');
